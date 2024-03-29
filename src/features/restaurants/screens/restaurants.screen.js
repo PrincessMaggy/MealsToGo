@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, SafeAreaView, StyleSheet, Text } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfo } from "../components/restaurantInfoCard.component";
+import styled from "styled-components/native";
 
 export const RestaurantScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
