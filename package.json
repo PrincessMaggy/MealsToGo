@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.3",
     "@expo-google-fonts/oswald": "^0.2.3",
+    "@expo/vector-icons": "^13.0.0",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "babel-eslint": "^10.1.0",

@@ -2,17 +2,39 @@ import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 import { RestaurantScreen } from "./src/features/restaurants/screens/restaurants.screen";
-import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
+import {
+  useFonts as useOswald,
+  Oswald_400Regular,
+} from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { Ionicons } from "@expo/vector-icons";
+
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+          if (route.name == "Restaurants") {
+            iconName = "restaurant";
+          } else if (route.name == "Settings") {
+            iconName = "md-settings";
+          } else if (route.name == "Map") {
+            iconName = "md-map";
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+      })}
+    >
       <Tab.Screen name="Restaurants" component={RestaurantScreen} />
       <Tab.Screen name="Map" component={RestaurantScreen} />
       <Tab.Screen name="Settings" component={RestaurantScreen} />
@@ -34,11 +56,13 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
+    <>
       <ThemeProvider theme={theme}>
-        <MyTabs />
+        <NavigationContainer>
+          <MyTabs />
+        </NavigationContainer>
       </ThemeProvider>
       <StatusBar style="auto" />
-    </NavigationContainer>
+    </>
   );
 }
