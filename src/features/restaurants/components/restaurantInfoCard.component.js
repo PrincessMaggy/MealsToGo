@@ -8,7 +8,7 @@ const Title = styled(Text)`
   padding: ${(props) => props.theme.space[1]};
   font-weight: ${(props) => props.theme.fontWeights.bold};
   font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.h1};
+  font-size: ${(props) => props.theme.fontSizes.title};
 `;
 const RestaurantCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
