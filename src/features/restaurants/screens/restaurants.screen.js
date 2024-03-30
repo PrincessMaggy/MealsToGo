@@ -6,25 +6,25 @@ import styled from "styled-components/native";
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
-  background-color: green;
+  background-color: ${(props) => props.theme.colors.bg.secondary};
   ${StatusBar.currentHeight && `marginTop: ${StatusBar.currentHeight}px`};
 `;
 
 const Search = styled(Searchbar)`
-  padding: 5px;
-  margin:15px;
-  backgroundcolor: green;
+  padding: ${(props) => props.theme.space[0]};
+  margin: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.brand.muted};
 `;
 const Container = styled(View)`
   flex: 1;
-  backgroundcolor: green;
+  background-color: ${(props) => props.theme.colors.bg.secondary};
   alignitems: center;
   justifycontent: center;
 `;
 
 const RestaurantListContainer = styled(View)`
   flex: 1;
-  padding: 16px;
+  padding: ${(props) => props.theme.space[3]};
 `;
 
 export const RestaurantScreen = () => {
