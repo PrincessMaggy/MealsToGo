@@ -41,7 +41,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               {ratingArr.map(
                 (
                   _,
-                  index // Use index as a key
+                  index
                 ) => (
                   <SvgXml
                     key={`star-${index}`}

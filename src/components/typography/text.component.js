@@ -45,7 +45,6 @@ export const StyledText = styled.Text`
   ${({ theme }) => defaultTextStyles(theme)}
   ${({ variant, theme }) => variants[variant](theme)}
 `;
-console.log(Object.keys(variants))
 Text.defaultProps = {
   variant: "body",
 };
