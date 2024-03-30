@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
@@ -39,11 +39,14 @@ const Rating = styled.View`
   padding-top: ${(prop) => prop.theme.space[1]};
   padding-bottom: ${(prop) => prop.theme.space[1]};
 `;
-
+const SectionEnd = styled.View`
+  flex-direction: row;
+  gap: ${(props)=> props.theme.space[1]};
+`;
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
     name = "Wizzy Maestro",
-    icon,
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
     photos = [
       "https://img.freepik.com/free-photo/top-view-fast-food-mix-mozzarella-sticks-club-sandwich-hamburger-mushroom-pizza-caesar-shrimp-salad-french-fries-ketchup-mayo-cheese-sauces-table_141793-3998.jpg?w=1480&t=st=1711461107~exp=1711461707~hmac=ac12768ce37a5419370d5a7c5a4a19a4a8833d01af0ea63a9e3677345fd6549e",
     ],
@@ -69,9 +72,10 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
                 <SvgXml xml={star} width={20} height={20} />
               ))}
             </Rating>
-            <View>
+            <SectionEnd>
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-            </View>
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </SectionEnd>
           </Section>
           <Address>{address}</Address>
         </Info>
