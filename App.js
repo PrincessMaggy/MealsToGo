@@ -5,6 +5,21 @@ import { RestaurantScreen } from "./src/features/restaurants/screens/restaurants
 import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Restaurants" component={RestaurantScreen} />
+      <Tab.Screen name="Map" component={RestaurantScreen} />
+      <Tab.Screen name="Settings" component={RestaurantScreen} />
+    </Tab.Navigator>
+  );
+}
+
 export default function App() {
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -19,11 +34,11 @@ export default function App() {
   }
 
   return (
-    <>
+    <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <RestaurantScreen />
+        <MyTabs />
       </ThemeProvider>
       <StatusBar style="auto" />
-    </>
+    </NavigationContainer>
   );
 }
