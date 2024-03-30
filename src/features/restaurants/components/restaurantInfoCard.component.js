@@ -2,7 +2,8 @@ import React from "react";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 import { Text, View } from "react-native";
-
+import { SvgXml } from "react-native-svg";
+import star from "../../../../assets/star";
 const Title = styled(Text)`
   color: ${(props) => props.theme.colors.ui.primary};
   font-weight: ${(props) => props.theme.fontWeights.bold};
@@ -28,6 +29,12 @@ const RestaurantCardCover = styled(Card.Cover)`
   padding: ${(props) => props.theme.space[2]};
 `;
 
+const Rating = styled.View`
+  flex-direction: row;
+  padding-top: ${(prop) => prop.theme.space[1]};
+  padding-bottom: ${(prop) => prop.theme.space[1]};
+`;
+
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
     name = "Wizzy Maestro",
@@ -41,6 +48,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     isClosedTemporarily = false,
   } = restaurant;
 
+  const ratingArr = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurantCard elevation={5}>
       <RestaurantCardCover
@@ -50,7 +58,12 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
       <Card.Content>
         <Info>
           <Title>{name}</Title>
-          <Address>{ address}</Address>
+          <Rating>
+            {ratingArr.map(() => (
+              <SvgXml xml={star} width={20} height={20} />
+            ))}
+          </Rating>
+          <Address>{address}</Address>
         </Info>
       </Card.Content>
     </RestaurantCard>
