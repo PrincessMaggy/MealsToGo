@@ -13,6 +13,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Ionicons } from "@expo/vector-icons";
 
+import { restaurantsRequests } from "./src/services/restaurants/restaurants.service";
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
