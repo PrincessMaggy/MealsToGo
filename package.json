@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "babel-eslint": "^10.1.0",
+    "camelize": "^1.0.1",
     "expo": "^50.0.14",
     "expo-font": "~11.10.3",
     "expo-status-bar": "~1.11.1",
