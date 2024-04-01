@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-native-paper";
-import { Image } from "react-native";
+import { Image, Text } from "react-native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
@@ -47,6 +47,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               ))}
             </Rating>
             <SectionEnd>
+              {isClosedTemporarily && <Text style={{color:'red'}}>CLOSED TEMPORARILY</Text>}
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             </SectionEnd>

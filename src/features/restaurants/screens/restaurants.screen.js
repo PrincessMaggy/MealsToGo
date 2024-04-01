@@ -41,7 +41,7 @@ export const RestaurantScreen = () => {
         <RestaurantList
           data={restaurants}
           renderItem={({item}) => <RestaurantInfo restaurant ={item} />}
-          keyExtractor={(item) => item.val}
+          keyExtractor={(item) => item.name}
         />
       </Container>
     </SafeArea>
