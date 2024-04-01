@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { SafeArea } from "../../../components/utility/safearea.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { Search } from "../components/search.component";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Container = styled(View)`
   flex: 1;
@@ -46,11 +47,11 @@ export const RestaurantScreen = ({ navigation }) => {
           data={restaurants}
           renderItem={({ item }) => {
             return (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => navigation.navigate("RestaurantDetail")}
               >
                 <RestaurantInfo restaurant={item} />
-              </Pressable>
+              </TouchableOpacity>
             );
           }}
           keyExtractor={(item) => item.name}
