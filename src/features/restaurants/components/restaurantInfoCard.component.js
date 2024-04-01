@@ -19,7 +19,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     name,
     icon,
     photos = [],
-    address,
+    vicinity,
     isOpenNow,
     rating,
     isClosedTemporarily,
@@ -52,7 +52,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             </SectionEnd>
           </Section>
-          <StyledText variant="label">{address}</StyledText>
+          <StyledText variant="label">{vicinity}</StyledText>
         </Info>
       </Card.Content>
     </RestaurantCard>
