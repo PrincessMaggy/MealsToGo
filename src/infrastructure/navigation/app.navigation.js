@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RestaurantScreen } from "../../features/restaurants/screens/restaurants.screen";
 import { Ionicons } from "@expo/vector-icons";
-
-
+import { RestaurantsNavigator } from "./restaurants.navigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,9 +25,9 @@ export function AppNavigation() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-      <Tab.Screen name="Map" component={RestaurantScreen} />
-      <Tab.Screen name="Settings" component={RestaurantScreen} />
+      <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+      {/* <Tab.Screen name="Map" component={RestaurantsNavigator} />
+      <Tab.Screen name="Settings" component={RestaurantsNavigator} /> */}
     </Tab.Navigator>
   );
 }
