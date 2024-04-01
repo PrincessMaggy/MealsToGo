@@ -26,8 +26,7 @@ const RestaurantList = styled(FlatList).attrs({
 
 export const RestaurantScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const restaurantsContext = useContext(RestaurantsContext);
-  console.log(restaurantsContext, "restaurantsContext");
+  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
 
   return (
     <SafeArea>
@@ -40,8 +39,8 @@ export const RestaurantScreen = () => {
           ></Search>
         </View>
         <RestaurantList
-          data={restaurantsContext.restaurants}
-          renderItem={({}) => <RestaurantInfo />}
+          data={restaurants}
+          renderItem={({item}) => <RestaurantInfo restaurant ={item} />}
           keyExtractor={(item) => item.val}
         />
       </Container>
