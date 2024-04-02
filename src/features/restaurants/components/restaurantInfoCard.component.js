@@ -24,8 +24,13 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     rating,
     isClosedTemporarily,
   } = restaurant;
-
-  const ratingArr = Array.from(new Array(Math.floor(rating)));
+  
+  let ratingArr;
+  if (rating !== undefined) {
+    ratingArr = Array.from(new Array(Math.floor(rating)));
+  } else {
+    ratingArr = Array.from(new Array(Math.floor(0)));
+  }
   return (
     <RestaurantCard elevation={5}>
       <RestaurantCardCover
@@ -47,7 +52,9 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
               ))}
             </Rating>
             <SectionEnd>
-              {isClosedTemporarily && <Text style={{color:'red'}}>CLOSED TEMPORARILY</Text>}
+              {isClosedTemporarily && (
+                <Text style={{ color: "red" }}>CLOSED TEMPORARILY</Text>
+              )}
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             </SectionEnd>
