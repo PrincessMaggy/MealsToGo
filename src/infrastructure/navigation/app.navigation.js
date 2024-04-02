@@ -12,7 +12,7 @@ export function AppNavigation() {
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name == "Restaurants") {
-            iconName = "restaurant";
+            iconName = "restaurant-outline";
           } else if (route.name == "Settings") {
             iconName = "md-settings";
           } else if (route.name == "Map") {
@@ -25,8 +25,16 @@ export function AppNavigation() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen
+        name="Restaurants"
+        options={{ headerShown: false }}
+         component={RestaurantsNavigator}
+      />
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{ headerShown: false }}
+      />
       {/* <Tab.Screen name="Settings" component={RestaurantsNavigator} /> */}
     </Tab.Navigator>
   );
