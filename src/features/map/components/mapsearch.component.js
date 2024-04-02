@@ -7,21 +7,30 @@ import { LocationContext } from "../../../services/location/location.context";
 const SearchBar = styled(Searchbar)`
   padding: ${(props) => props.theme.space[0]};
   margin: ${(props) => props.theme.space[2]};
-  background-color: ${(props) => props.theme.colors.brand.muted};
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
-export const Search = () => {
+const SearchContainer = styled(View)`
+  z-index: 999;
+  position: absolute;
+  top: 65px;
+  width: 100%;
+`;
+
+export const SearchMap = () => {
   const { keyword, search } = useContext(LocationContext);
   const [searchQuery, setSearchQuery] = useState(keyword);
 
   useEffect(() => {
     setSearchQuery(keyword);
+    //search(searchQuery);
   }, [keyword]);
 
   return (
-    <View>
+    <SearchContainer>
       <SearchBar
-        placeholder="Search by location"
+        placeholder="Search for location"
+        icon="map"
         value={searchQuery}
         onChangeText={(text) => {
           setSearchQuery(text);
@@ -30,6 +39,6 @@ export const Search = () => {
           search(searchQuery);
         }}
       ></SearchBar>
-    </View>
+    </SearchContainer>
   );
 };
