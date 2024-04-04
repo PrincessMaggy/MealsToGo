@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AccountScreen } from "../../features/account/screens/accounts.screen";
 import { LoginScreen } from "../../features/account/screens/login.screen";

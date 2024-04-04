@@ -24,7 +24,6 @@ export const AuthenticationContextProvider = ({ children }) => {
     } else {
       setIsLoading(false);
     }
-    console.log(!!user,'user')
   });
 
   const onLogin = (email, password) => {
