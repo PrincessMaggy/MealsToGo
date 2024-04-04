@@ -9,7 +9,7 @@ import {
   ErrorContainer,
   Title,
 } from "../components/account.styles";
-import { Text } from "../../../components/typography/text.component";
+import { StyledText } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
@@ -43,7 +43,7 @@ export const LoginScreen = ({ navigation }) => {
         </Spacer>
         {error && (
           <ErrorContainer size="large">
-            <Text variant="error">{error}</Text>
+            <StyledText variant="error">{error}</StyledText>
           </ErrorContainer>
         )}
         <Spacer size="large">
