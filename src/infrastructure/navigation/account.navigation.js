@@ -7,9 +7,21 @@ import { RegisterScreen } from "../../features/account/screens/register.screen";
 const Stack = createStackNavigator();
 
 export const AccountNavigator = () => (
-  <Stack.Navigator options={{ headerShown: false }}>
-    <Stack.Screen name="Main" component={AccountScreen} />
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="Register" component={RegisterScreen} />
+  <Stack.Navigator >
+    <Stack.Screen
+      name="Main"
+      component={AccountScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Register"
+      component={RegisterScreen}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
