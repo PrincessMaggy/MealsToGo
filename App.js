@@ -10,7 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
-
+import { app } from "./firebase.config";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
