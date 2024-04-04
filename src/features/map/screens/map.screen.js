@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components/native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 import { SafeArea } from "../../../components/utility/safearea.component";
 import { SearchMap } from "../components/mapsearch.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import custom_pin from "../../../../assets/star";
+import { MapCallout } from "../components/map-callout.component";
 
 const Map = styled(MapView)`
   height: 100%;
@@ -29,7 +29,7 @@ export const MapScreen = ({ navigation }) => {
     <SafeArea>
       <SearchMap />
       <Map
-        initialRegion={{
+        region={{
           latitude: lat,
           longitude: lng,
           latitudeDelta: latDelta,
@@ -44,7 +44,17 @@ export const MapScreen = ({ navigation }) => {
               latitude: item.geometry.location.lat,
               longitude: item.geometry.location.lng,
             }}
-          />
+          >
+            <Callout
+              onPress={() =>
+                navigation.navigate("RestaurantDetail", {
+                  item,
+                })
+              }
+            >
+              <MapCallout restaurant={item} />
+            </Callout>
+          </Marker>
         ))}
       </Map>
     </SafeArea>
