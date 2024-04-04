@@ -12,6 +12,7 @@ import { RestaurantsContextProvider } from "./src/services/restaurants/restauran
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { app } from "./firebase.config";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { MainNavigation } from "./src/infrastructure/navigation";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -32,9 +33,7 @@ export default function App() {
         <AuthenticationContextProvider>
           <LocationContextProvider>
             <RestaurantsContextProvider>
-              <NavigationContainer>
-                <AppNavigation />
-              </NavigationContainer>
+                <MainNavigation />
             </RestaurantsContextProvider>
           </LocationContextProvider>
         </AuthenticationContextProvider>
