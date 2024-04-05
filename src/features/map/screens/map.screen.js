@@ -26,11 +26,13 @@ export const MapScreen = ({ navigation }) => {
     setLatDelta(latDelta);
   }, [location, viewport]);
 
+  
+
   return (
     <SafeArea>
       <SearchMap />
       <Map
-        provider={PROVIDER_GOOGLE}
+        // provider={PROVIDER_GOOGLE}
         region={{
           latitude: lat,
           longitude: lng,
