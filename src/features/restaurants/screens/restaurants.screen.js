@@ -7,6 +7,7 @@ import { SafeArea } from "../../../components/utility/safearea.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { Search } from "../components/search.component";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const Container = styled(View)`
   flex: 1;
@@ -54,7 +55,9 @@ export const RestaurantScreen = ({ navigation }) => {
                   })
                 }
               >
-                <RestaurantInfo restaurant={item} />
+                <FadeInView>
+                  <RestaurantInfo restaurant={item} />
+                </FadeInView>
               </TouchableOpacity>
             );
           }}
