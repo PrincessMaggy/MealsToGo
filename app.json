@@ -11,25 +11,27 @@
       "resizeMode": "contain",
       "backgroundColor": "#F1F1F1"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maggy.mealstogo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#F1F1F1"
       },
-      "package": "MealsToGo.V1"
+      "package": "MealsToGo.V1",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBQseD3PE5z8o5EZpn3rBld7BUlYjmw8vM"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/splash.png"
     },
-    "plugins": [
-      "expo-font"
-    ],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "26ebe0a9-34bb-48f2-8712-3977d0833141"

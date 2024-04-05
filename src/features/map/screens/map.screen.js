@@ -6,6 +6,7 @@ import { SearchMap } from "../components/mapsearch.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { MapCallout } from "../components/map-callout.component";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 const Map = styled(MapView)`
   height: 100%;
@@ -29,6 +30,7 @@ export const MapScreen = ({ navigation }) => {
     <SafeArea>
       <SearchMap />
       <Map
+        provider={PROVIDER_GOOGLE}
         region={{
           latitude: lat,
           longitude: lng,
@@ -48,7 +50,7 @@ export const MapScreen = ({ navigation }) => {
             <Callout
               onPress={() =>
                 navigation.navigate("RestaurantDetail", {
-                  restaurant:item,
+                  restaurant: item,
                 })
               }
             >
