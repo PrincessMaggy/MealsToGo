@@ -36,7 +36,11 @@ export function AppNavigation() {
         component={MapScreen}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Settings" component={SettingsNavigator} />
+      <Tab.Screen
+        name="Settings"
+        options={{ headerShown: false }}
+        component={SettingsNavigator}
+      />
     </Tab.Navigator>
   );
 }
