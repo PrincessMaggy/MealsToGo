@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
+import { SettingsNavigator } from "./settings.navigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ export function AppNavigation() {
         component={MapScreen}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Settings" component={SettingsNavigator} />
     </Tab.Navigator>
   );
 }
