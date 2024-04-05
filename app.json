@@ -19,15 +19,27 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#F1F1F1"
-      }
+      },
+      "package": "MealsToGo.V1"
     },
     "web": {
       "favicon": "./assets/splash.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "26ebe0a9-34bb-48f2-8712-3977d0833141"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/26ebe0a9-34bb-48f2-8712-3977d0833141"
+    }
   }
 }
