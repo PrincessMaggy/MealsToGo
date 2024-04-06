@@ -1,56 +1,34 @@
-import React from "react";
-import { Camera, CameraType } from "expo-camera";
-import { useState } from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useRef, useEffect, useState } from "react";
+import { Camera } from "expo-camera";
+import styled from "styled-components/native";
+import { View, Text } from "react-native";
 
+const ProfileCamera = styled(Camera)`
+  width: 100%;
+  height: 10 0%;
+`;
 export const CameraScreen = () => {
-  const [type, setType] = useState(CameraType.back);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [hasPermission, setHasPermission] = useState(null);
+  const cameraRef = useRef();
 
-  //   if (!permission) ...
+  useEffect(() => {
+    async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === "granted");
+    };
+  }, []);
 
-  //   if (!permission.granted) ...
-
-  function toggleCameraType() {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    );
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No permission to camera</Text>;
   }
   return (
-    <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
+    <ProfileCamera
+      ref={(r) => (cameraRef.current = r)}
+      style={{ width: "100%", height: "100%" }}
+      type={Camera.Constants.Type.front}
+    ></ProfileCamera>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  camera: {
-    flex: 1,
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: "transparent",
-    margin: 64,
-  },
-  button: {
-    flex: 1,
-    alignSelf: "flex-end",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-  },
-});
