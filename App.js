@@ -12,6 +12,11 @@ import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
 import { app } from "./firebase.config";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { MainNavigation } from "./src/infrastructure/navigation";
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://57f2a1922937faa95c0d136b2e4f4e1d@o4507038565662720.ingest.us.sentry.io/4507038568087552',
+});
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
