@@ -21,6 +21,7 @@
     "babel-eslint": "^10.1.0",
     "camelize": "^1.0.1",
     "expo": "^50.0.14",
+    "expo-camera": "~14.1.1",
     "expo-font": "~11.10.3",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.12",

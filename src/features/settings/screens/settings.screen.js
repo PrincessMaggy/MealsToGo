@@ -5,7 +5,7 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 import styled from "styled-components/native";
 import { View } from "react-native";
 import { StyledText } from "../../../components/typography/text.component";
-
+import { TouchableOpacity } from "react-native";
 
 
 const SettingsItem = styled(List.Item)`
@@ -22,7 +22,9 @@ export const SettingsScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <AvatarContainer>
-        <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+        <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+          <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+        </TouchableOpacity>
         <StyledText variant="label">{user.email}</StyledText>
       </AvatarContainer>
       <List.Section>
