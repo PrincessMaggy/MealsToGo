@@ -8,20 +8,13 @@ const ProfileCamera = styled(Camera)`
   height: 10 0%;
 `;
 export const CameraScreen = () => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
   const cameraRef = useRef();
 
-  useEffect(() => {
-    async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
-    };
-  }, []);
-
-  if (hasPermission === null) {
-    return <View />;
+  if (permission) {
+    return <Text>{permission} from first condition</Text>;
   }
-  if (hasPermission === false) {
+  if (!permission.granted) {
     return <Text>No permission to camera</Text>;
   }
   return (
