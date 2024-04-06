@@ -31,15 +31,7 @@
     "web": {
       "favicon": "./assets/splash.png"
     },
-    "plugins": [
-      "expo-font",
-      "expo-camera",
-      {
-        "cameraPermission": "Allow MealsToGo to access your camera",
-        "microphonePermission": "Allow MealsToGo to access your microphone",
-        "recordAudioAndroid": true
-      }
-    ],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "26ebe0a9-34bb-48f2-8712-3977d0833141"
