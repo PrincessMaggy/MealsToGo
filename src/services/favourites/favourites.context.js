@@ -54,6 +54,16 @@ export const FavouritesContextProvider = ({ children }) => {
     }
   }, [favourites, user]);
 
+  // Clear AsyncStorage on app reload
+  // useEffect(() => {
+  //   const clearAsyncStorage = async () => {
+  //     await AsyncStorage.clear();
+  //   };
+
+  //   clearAsyncStorage();
+  //   // return clearAsyncStorage;
+  // }, []);
+
   return (
     <FavouritesContext.Provider
       value={{
@@ -66,3 +76,4 @@ export const FavouritesContextProvider = ({ children }) => {
     </FavouritesContext.Provider>
   );
 };
+

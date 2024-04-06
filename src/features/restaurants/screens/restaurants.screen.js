@@ -11,7 +11,6 @@ import { FadeInView } from "../../../components/animations/fade.animation";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FavouritesBar } from "../../../components/favourite/favourites-bar.component";
 
-
 const Container = styled(View)`
   flex: 1;
   background-color: ${(props) => props.theme.colors.bg.secondary};
@@ -34,6 +33,20 @@ export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
   const { favourites, addToFavourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
+
+  const handlePressRestaurant = (restaurant, isIconPress) => {
+    if (!isIconPress) {
+      const isFavourite = favourites.some(
+        (fav) => fav.placeId === restaurant.placeId
+      );
+      if (!isFavourite) {
+        addToFavourites(restaurant);
+      }
+      navigation.navigate("RestaurantDetail", {
+        restaurant: restaurant,
+      });
+    }
+  };
   return (
     <SafeArea>
       <Container>
@@ -52,7 +65,10 @@ export const RestaurantScreen = ({ navigation }) => {
           onFavouritesToggled={() => setIsToggled(!isToggled)}
         />
         {isToggled && (
-          <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+          <FavouritesBar
+            favourites={favourites}
+            onNavigate={navigation.navigate}
+          />
         )}
 
         <RestaurantList
@@ -60,15 +76,13 @@ export const RestaurantScreen = ({ navigation }) => {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => {
-                  addToFavourites(item);
-                  navigation.navigate("RestaurantDetail", {
-                    restaurant: item,
-                  });
-                }}
+                onPress={() => handlePressRestaurant(item, false)}
               >
                 <FadeInView>
-                  <RestaurantInfo restaurant={item} />
+                  <RestaurantInfo
+                    restaurant={item}
+                    onPressIcon={() => handlePressRestaurant(item, true)}
+                  />
                 </FadeInView>
               </TouchableOpacity>
             );

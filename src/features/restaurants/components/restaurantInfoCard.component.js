@@ -6,6 +6,7 @@ import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 import { StyledText } from "../../../components/typography/text.component";
 import { Favourite } from "../../../components/favourite/favourite.component";
+
 import {
   SectionEnd,
   RestaurantCard,
@@ -15,7 +16,7 @@ import {
   Rating,
 } from "./restaurantInfoCardStyles";
 
-export const RestaurantInfo = ({ restaurant = {} }) => {
+export const RestaurantInfo = ({ restaurant = {}, onPressIcon }) => {
   const {
     name,
     icon,
@@ -36,7 +37,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
   return (
     <RestaurantCard elevation={5}>
       <View>
-        <Favourite restaurant={restaurant} />
+        <Favourite restaurant={restaurant} onPress={onPressIcon} />
         <RestaurantCardCover
           key={name}
           source={{ uri: photos[0] }}
