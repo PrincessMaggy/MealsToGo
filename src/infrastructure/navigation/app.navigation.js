@@ -15,9 +15,9 @@ export function AppNavigation() {
           if (route.name == "Restaurants") {
             iconName = "restaurant-outline";
           } else if (route.name == "Settings") {
-            iconName = "md-settings";
+            iconName = "settings-outline";
           } else if (route.name == "Map") {
-            iconName = "md-map";
+            iconName = "map-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
