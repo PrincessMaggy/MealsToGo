@@ -7,7 +7,8 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
 import { app } from "./firebase.config";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { MainNavigation } from "./src/infrastructure/navigation";
@@ -29,12 +30,10 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-         
-                <MainNavigation />
-            
+          <MainNavigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
     </>
   );
 }
