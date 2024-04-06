@@ -33,7 +33,6 @@
     },
     "plugins": [
       [
-        "expo-font",
         "expo-camera",
         {
           "cameraPermission": "Allow mealstogo to access your camera",
