@@ -7,15 +7,10 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-import { NavigationContainer } from "@react-navigation/native";
-import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";import { AppNavigation } from "./src/infrastructure/navigation/app.navigation";
 import { app } from "./firebase.config";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { MainNavigation } from "./src/infrastructure/navigation";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -34,13 +29,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
+         
                 <MainNavigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+            
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />
