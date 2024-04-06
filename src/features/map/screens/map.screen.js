@@ -26,8 +26,6 @@ export const MapScreen = ({ navigation }) => {
     setLatDelta(latDelta);
   }, [location, viewport]);
 
-  
-
   return (
     <SafeArea>
       <SearchMap />

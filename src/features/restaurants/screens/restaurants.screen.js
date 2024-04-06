@@ -8,6 +8,9 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { Search } from "../components/search.component";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FadeInView } from "../../../components/animations/fade.animation";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { FavouritesBar } from "../../../components/favourite/favourites-bar.component";
+
 
 const Container = styled(View)`
   flex: 1;
@@ -29,7 +32,8 @@ const LoadingContainer = styled(View)`
 
 export const RestaurantScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
-
+  const { favourites, addToFavourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
   return (
     <SafeArea>
       <Container>
@@ -43,17 +47,25 @@ export const RestaurantScreen = ({ navigation }) => {
             />
           </LoadingContainer>
         )}
-        <Search />
+        <Search
+          isFavouritesToggled={isToggled}
+          onFavouritesToggled={() => setIsToggled(!isToggled)}
+        />
+        {isToggled && (
+          <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+        )}
+
         <RestaurantList
           data={restaurants}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() =>
+                onPress={() => {
+                  addToFavourites(item);
                   navigation.navigate("RestaurantDetail", {
                     restaurant: item,
-                  })
-                }
+                  });
+                }}
               >
                 <FadeInView>
                   <RestaurantInfo restaurant={item} />
@@ -61,7 +73,7 @@ export const RestaurantScreen = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => `${item.placeId} item.name`}
         />
       </Container>
     </SafeArea>

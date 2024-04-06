@@ -13,6 +13,7 @@ import { LocationContextProvider } from "./src/services/location/location.contex
 import { app } from "./firebase.config";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { MainNavigation } from "./src/infrastructure/navigation";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -31,11 +32,13 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
                 <MainNavigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />

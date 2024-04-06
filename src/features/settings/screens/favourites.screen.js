@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 import { SafeArea } from "../../../components/utility/safearea.component";
-import { StyledText } from "../../../components/typography/text.component";
+import { Text } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { RestaurantList } from "../../restaurants/components/restaurant-list.styles";
@@ -14,7 +15,7 @@ const NoFavouritesArea = styled(SafeArea)`
   justify-content: center;
 `;
 export const FavouritesScreen = ({ navigation }) => {
-  const { favourites } = [];
+  const { favourites } = useContext(FavouritesContext);
 
   return favourites?.length ? (
     <SafeArea>
@@ -40,7 +41,7 @@ export const FavouritesScreen = ({ navigation }) => {
     </SafeArea>
   ) : (
     <NoFavouritesArea>
-      <StyledText>No favourites yet</StyledText>
+      <Text>No favourites yet</Text>
     </NoFavouritesArea>
   );
 };
