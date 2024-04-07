@@ -11,7 +11,8 @@ const SearchBar = styled(Searchbar)`
 `;
 
 export const Search = ({ isFavouritesToggled, onFavouritesToggled }) => {
-  const { keyword, search } = useContext(LocationContext);
+  const { keyword, search, getLocationCoordinates } =
+    useContext(LocationContext);
   const [searchQuery, setSearchQuery] = useState(keyword);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export const Search = ({ isFavouritesToggled, onFavouritesToggled }) => {
         }}
         onSubmitEditing={() => {
           search(searchQuery);
+          getLocationCoordinates(searchQuery);
         }}
       ></SearchBar>
     </View>
