@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Camera } from "expo-camera";
 import styled from "styled-components/native";
-import { View, Text } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import SafeArea from "../../../components/utility/safearea.component";
 
 const ProfileCamera = styled(Camera)`
@@ -15,24 +15,23 @@ export const CameraScreen = () => {
     requestPermission();
   }, []);
 
-  // if (permission) {
-  //   return (
-  //       <View style={{ marginTop: "430px" }}>
-  //         <Text>
-  //           {permission.granted ? "Granted" : "Not granted"} from first
-  //           condition
-  //         </Text>
-  //       </View>
-  //   );
-  // }
+  const snapPics = async () => {
+    if (cameraRef) {
+      const photo = await cameraRef.current.takePictureAsync();
+      console.log(photo);
+    }
+  };
   if (!permission) {
-    return <Text>No permission to camera</Text>;
+    return <Text>No permission to use camera</Text>;
   }
+
   return (
-    <ProfileCamera
-      ref={(r) => (cameraRef.current = r)}
-      style={{ width: "100%", height: "100%" }}
-      type={Camera.Constants.Type.front}
-    ></ProfileCamera>
+    <TouchableOpacity onPress={snapPics}>
+      <ProfileCamera
+        ref={(r) => (cameraRef.current = r)}
+        style={{ width: "100%", height: "100%" }}
+        type={Camera.Constants.Type.front}
+      ></ProfileCamera>
+    </TouchableOpacity>
   );
 };
