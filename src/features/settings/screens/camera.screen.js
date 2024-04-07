@@ -2,19 +2,30 @@ import React, { useRef, useEffect, useState } from "react";
 import { Camera } from "expo-camera";
 import styled from "styled-components/native";
 import { View, Text } from "react-native";
+import SafeArea from "../../../components/utility/safearea.component";
 
 const ProfileCamera = styled(Camera)`
   width: 100%;
-  height: 10 0%;
+  height: 100%;
 `;
 export const CameraScreen = () => {
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const cameraRef = useRef();
+  useEffect(() => {
+    requestPermission();
+  }, []);
 
   if (permission) {
-    return <Text>{permission} from first condition</Text>;
+    return (
+        <View style={{ marginTop: "430px" }}>
+          <Text>
+            {permission.granted ? "Granted" : "Not granted"} from first
+            condition
+          </Text>
+        </View>
+    );
   }
-  if (!permission.granted) {
+  if (!permission) {
     return <Text>No permission to camera</Text>;
   }
   return (
