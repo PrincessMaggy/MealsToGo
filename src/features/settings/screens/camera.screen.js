@@ -15,16 +15,16 @@ export const CameraScreen = () => {
     requestPermission();
   }, []);
 
-  if (permission) {
-    return (
-        <View style={{ marginTop: "430px" }}>
-          <Text>
-            {permission.granted ? "Granted" : "Not granted"} from first
-            condition
-          </Text>
-        </View>
-    );
-  }
+  // if (permission) {
+  //   return (
+  //       <View style={{ marginTop: "430px" }}>
+  //         <Text>
+  //           {permission.granted ? "Granted" : "Not granted"} from first
+  //           condition
+  //         </Text>
+  //       </View>
+  //   );
+  // }
   if (!permission) {
     return <Text>No permission to camera</Text>;
   }
