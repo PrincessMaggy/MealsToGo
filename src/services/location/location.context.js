@@ -1,12 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
-import { locationRequest, locationTransform } from "./location.service";
-import { getCommonStores } from "../restaurants/restaurants.service";
+import { Lato_100Thin_Italic } from "@expo-google-fonts/lato";
+import React, { createContext, useState, useEffect } from "react";
 
 export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
-  const [location, setLocation] = useState("");
-  const [keyword, setKeyword] = useState("san francisco");
+  const [keyword, setKeyword] = useState("Lagos Ikeja");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [latitude, setLatitude] = useState(null);
@@ -16,60 +14,48 @@ export const LocationContextProvider = ({ children }) => {
     setIsLoading(true);
     setKeyword(searchKeyword);
   };
-
   useEffect(() => {
-    if (!keyword.length) {
-      return;
-    }
-    locationRequest(keyword.toLowerCase())
-      .then(locationTransform)
-      .then((result) => {
-        setIsLoading(false);
-        setLocation(result);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError(err);
-      });
-  }, [keyword]);
-
-  const getLocationCoordinates = async (locationName) => {
-    let lati;
-    let longi;
-    if (locationName) {
-      console.log(locationName, "locationName");
-      try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-            locationName
-          )}`
-        );
-        const data = await response.json();
-        if (data) {
-          lati = parseFloat(data[0].lat);
-          longi = parseFloat(data[0].lon);
-          setLatitude(lati);
-          setLongitude(longi);
-          getCommonStores(`${latitude},${longitude}`);
-          return { latitude, longitude };
-        } else {
-          throw new Error("Location not found");
+    const getLocationCoordinates = async () => {
+      let lati;
+      let longi;
+      if (keyword) {
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+              keyword
+            )}`
+          );
+          const data = await response.json();
+          if (data.length > 0) {
+            lati = parseFloat(data[0].lat);
+            longi = parseFloat(data[0].lon);
+            setLatitude(lati);
+            setLongitude(longi);
+            return { latitude, longitude };
+          } else {
+            setError("Location not found");
+          }
+        } catch (error) {
+          setError("Error converting location to coordinates");
         }
-      } catch (error) {
-        console.error("Error converting location to coordinates:", error);
-        throw error;
       }
-    }
-  };
+    };
+    const timeout = setTimeout(() => {
+      getLocationCoordinates();
+    }, 1000);
 
+    return () => clearTimeout(timeout);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyword]);
   return (
     <LocationContext.Provider
       value={{
         isLoading,
         keyword,
+        latitude,
+        longitude,
         error,
-        location,
-        getLocationCoordinates,
         search: onSearch,
       }}
     >
