@@ -1,5 +1,7 @@
 {
-    "plugins": ["@react-native-community"],
-   "parser": "@babel/eslint-parser"
-
+  "plugins": ["@react-native-community",   "eslint-plugin-react-hooks"],
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "react-hooks/exhaustive-deps": "warn"
+  }
 }
