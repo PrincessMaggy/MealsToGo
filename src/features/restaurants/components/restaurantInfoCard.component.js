@@ -19,20 +19,18 @@ import {
 export const RestaurantInfo = ({ restaurant = {}, onPressIcon }) => {
   const {
     name,
-    icon,
-    photos = [],
-    vicinity,
-    isOpenNow,
-    rating,
-    placeId,
-    isClosedTemporarily,
+    location,
+    id,
+    imageUrl,
+    closed_bucket,
   } = restaurant;
 
   let ratingArr;
-  if (rating !== undefined) {
-    ratingArr = Array.from(new Array(Math.floor(rating)));
+
+  if (Array.isArray(imageUrl) && imageUrl.length !== 0) {
+    ratingArr = Array.from(new Array(Math.floor(imageUrl.length / 3)));
   } else {
-    ratingArr = Array.from(new Array(Math.floor(0)));
+    ratingArr = [];
   }
   return (
     <RestaurantCard elevation={5}>
@@ -40,7 +38,12 @@ export const RestaurantInfo = ({ restaurant = {}, onPressIcon }) => {
         <Favourite restaurant={restaurant} onPress={onPressIcon} />
         <RestaurantCardCover
           key={name}
-          source={{ uri: photos[0] }}
+          source={{
+            uri:
+              Array.isArray(imageUrl) && imageUrl.length > 0
+                ? imageUrl[0]
+                : "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
+          }}
         ></RestaurantCardCover>
       </View>
 
@@ -51,7 +54,7 @@ export const RestaurantInfo = ({ restaurant = {}, onPressIcon }) => {
             <Rating>
               {ratingArr.map((_, index) => (
                 <SvgXml
-                  key={`star-${placeId}-${index}`}
+                  key={`star-${id}-${index}`}
                   xml={star}
                   width={20}
                   height={20}
@@ -59,14 +62,15 @@ export const RestaurantInfo = ({ restaurant = {}, onPressIcon }) => {
               ))}
             </Rating>
             <SectionEnd>
-              {isClosedTemporarily && (
+              {closed_bucket !== "VeryLikelyOpen" && (
                 <Text style={{ color: "red" }}>CLOSED TEMPORARILY</Text>
               )}
-              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+              {closed_bucket == "VeryLikelyOpen" && (
+                <SvgXml xml={open} width={20} height={20} />
+              )}
             </SectionEnd>
           </Section>
-          <StyledText variant="label">{vicinity}</StyledText>
+          <StyledText variant="label">{location}</StyledText>
         </Info>
       </Card.Content>
     </RestaurantCard>

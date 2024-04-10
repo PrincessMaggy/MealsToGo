@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
-
+import { StyledText } from "../../../components/typography/text.component";
 import { SafeArea } from "../../../components/utility/safearea.component";
 import { Text } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -19,6 +19,9 @@ export const FavouritesScreen = ({ navigation }) => {
 
   return favourites?.length ? (
     <SafeArea>
+      <View>
+        <StyledText variant="body">Favourites</StyledText>
+      </View>
       <RestaurantList
         data={favourites}
         renderItem={({ item }) => {

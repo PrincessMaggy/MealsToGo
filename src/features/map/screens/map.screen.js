@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { SafeArea } from "../../../components/utility/safearea.component";
 import { SearchMap } from "../components/mapsearch.component";
-import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { MapCallout } from "../components/map-callout.component";
 import { PROVIDER_GOOGLE } from "react-native-maps";
+import { ActivityIndicator } from "react-native-paper";
+import { LocationContext } from "../../../services/location/location.context";
 
 const Map = styled(MapView)`
   height: 100%;
@@ -14,17 +15,21 @@ const Map = styled(MapView)`
 `;
 
 export const MapScreen = ({ navigation }) => {
-  const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
-  const [latDelta, setLatDelta] = useState(0);
-  const { viewport, lat, lng } = location;
+  const { latitude, longitude } = useContext(LocationContext);
 
-  useEffect(() => {
-    const northeastLat = viewport.northeast.lat;
-    const southwestLat = viewport.southwest.lat;
-    const latDelta = northeastLat - southwestLat;
-    setLatDelta(latDelta);
-  }, [location, viewport]);
+  if (!latitude || !longitude) {
+    return (
+      <SafeArea>
+        <ActivityIndicator
+          size={50}
+          animating={true}
+          style={{ marginLeft: -35, marginTop: 40 }}
+          color="blue"
+        />
+      </SafeArea>
+    );
+  }
 
   return (
     <SafeArea>
@@ -32,9 +37,9 @@ export const MapScreen = ({ navigation }) => {
       <Map
         // provider={PROVIDER_GOOGLE}
         region={{
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: latDelta,
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.5,
           longitudeDelta: 0.02,
         }}
       >
@@ -43,8 +48,8 @@ export const MapScreen = ({ navigation }) => {
             key={item.name}
             title={item.name}
             coordinate={{
-              latitude: item.geometry.location.lat,
-              longitude: item.geometry.location.lng,
+              latitude: item.geoLat,
+              longitude: item.geoLong,
             }}
           >
             <Callout
