@@ -11,7 +11,7 @@ const SearchBar = styled(Searchbar)`
 `;
 
 export const Search = ({ isFavouritesToggled, onFavouritesToggled }) => {
-  const { keyword, search, getLocationCoordinates } =
+  const { keyword, search } =
     useContext(LocationContext);
   const [searchQuery, setSearchQuery] = useState(keyword);
 
@@ -24,14 +24,13 @@ export const Search = ({ isFavouritesToggled, onFavouritesToggled }) => {
       <SearchBar
         icon={isFavouritesToggled ? "heart" : "heart-outline"}
         onIconPress={onFavouritesToggled}
-        placeholder="Search by location"
+        placeholder="Search by cities & countries"
         value={searchQuery}
         onChangeText={(text) => {
           setSearchQuery(text);
         }}
         onSubmitEditing={() => {
           search(searchQuery);
-          getLocationCoordinates(searchQuery);
         }}
       ></SearchBar>
     </View>

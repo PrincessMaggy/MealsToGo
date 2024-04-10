@@ -1,4 +1,3 @@
-import { Lato_100Thin_Italic } from "@expo-google-fonts/lato";
 import React, { createContext, useState, useEffect } from "react";
 
 export const LocationContext = createContext();
@@ -57,6 +56,7 @@ export const LocationContextProvider = ({ children }) => {
         longitude,
         error,
         search: onSearch,
+        setIsLoading,
       }}
     >
       {children}

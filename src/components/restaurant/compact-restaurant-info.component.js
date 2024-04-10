@@ -26,7 +26,14 @@ export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
   const Img = isAndroid && isMap ? CompactWebView : CompactImage;
   return (
     <Item>
-      <Img source={{ uri: restaurant.photos[0] }} />
+      <Img
+        source={{
+          uri:
+            Array.isArray(restaurant.imageUrl) && restaurant.imageUrl.length > 0
+              ? restaurant.imageUrl[0]
+              : "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
+        }}
+      />
       <Text center variant="caption" numberOfLines={3}>
         {restaurant.name}
       </Text>

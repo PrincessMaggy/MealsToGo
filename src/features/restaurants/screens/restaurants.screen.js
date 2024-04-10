@@ -10,6 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FavouritesBar } from "../../../components/favourite/favourites-bar.component";
+import { LocationContext } from "../../../services/location/location.context";
 
 const Container = styled(View)`
   flex: 1;
@@ -27,10 +28,13 @@ const LoadingContainer = styled(View)`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 999;
 `;
 
 export const RestaurantScreen = ({ navigation }) => {
-  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { restaurants, error } = useContext(RestaurantsContext);
+    const {  isLoading } = useContext(LocationContext);
+
   const { favourites, addToFavourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
 
@@ -87,7 +91,7 @@ export const RestaurantScreen = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(item) => `${item.placeId} item.name`}
+          keyExtractor={(item) => `${item.id} item.name`}
         />
       </Container>
     </SafeArea>

@@ -1,50 +1,39 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
-import {
-  restaurantsRequest,
-  restaurantsTransform,
-} from "./restaurants.service";
 import { LocationContext } from "../location/location.context";
+import { getCommonStores } from "./restaurants.service";
 
 export const RestaurantsContext = createContext();
 
 export const RestaurantsContextProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { location } = useContext(LocationContext);
-
-  const retrieveRestaurants = (loc) => {
-    setIsLoading(true);
-    setRestaurants([]);
-
-    setTimeout(() => {
-      restaurantsRequest(loc)
-        .then(restaurantsTransform)
-        .then((results) => {
-          setIsLoading(false);
-          setRestaurants(results);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
-          console.log(err, "err");
-        });
-    }, 2000);
-  };
+  const { longitude, latitude, keyword, isLoading, setIsLoading } =
+    useContext(LocationContext);
 
   useEffect(() => {
-    if (location) {
-      const locationString = `${location.lat},${location.lng}`;
-      retrieveRestaurants(locationString);
-    }
-  }, [location]);
+    setIsLoading(true);
 
+    const fetchData = async () => {
+      try {
+        if (latitude !== null) {
+          const data = await getCommonStores(`${latitude},${longitude}`);
+          setRestaurants(data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsLoading(false);
+        setError("Error fetching data");
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [longitude]);
 
   return (
-    <RestaurantsContext.Provider
-      value={{ restaurants, isLoading, error }}
-    >
+    <RestaurantsContext.Provider value={{ restaurants, error }}>
       {children}
     </RestaurantsContext.Provider>
   );
