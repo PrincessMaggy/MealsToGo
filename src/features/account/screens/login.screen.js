@@ -13,6 +13,8 @@ import { StyledText } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
+import * as Sentry from "@sentry/react-native";
+import { Button } from "react-native";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -22,6 +24,12 @@ export const LoginScreen = ({ navigation }) => {
     <AccountBackground>
       <AccountCover />
       <Title>Meals To Go</Title>
+      <Button
+        title="Try!"
+        onPress={() => {
+          Sentry.captureException(new Error("First error"));
+        }}
+      />
       <AccountContainer>
         <AuthInput
           label="E-mail"

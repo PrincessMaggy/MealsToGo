@@ -18,7 +18,8 @@ Sentry.init({
   dsn: 'https://57f2a1922937faa95c0d136b2e4f4e1d@o4507038565662720.ingest.us.sentry.io/4507038568087552',
 });
 
-export default function App() {
+
+function App() {
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -42,3 +43,5 @@ export default function App() {
     </>
   );
 }
+
+export default Sentry.wrap(App)
